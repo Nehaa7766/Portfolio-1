@@ -5,12 +5,6 @@ import {
   FileText,
   Mail,
   SquareTerminal,
-  Rocket,
-  Activity,
-  Network,
-  GitBranch,
-  Brain,
-  Code2,
   Bot,
 } from "lucide-react";
 import type { AppDefinition, AppId } from "@/types/window";
@@ -21,12 +15,6 @@ import ExperienceWindow from "@/windows/Experience";
 import ResumeWindow from "@/windows/Resume";
 import ContactWindow from "@/windows/Contact";
 import TerminalWindow from "@/windows/Terminal";
-import MissionControlWindow from "@/windows/MissionControl";
-import LiveMetricsWindow from "@/windows/LiveMetrics";
-import ArchitectureExplorerWindow from "@/windows/ArchitectureExplorer";
-import DecisionEngineWindow from "@/windows/DecisionEngine";
-import MindMapWindow from "@/windows/MindMap";
-import CodeReviewSimulatorWindow from "@/windows/CodeReviewSimulator";
 import AIAssistantWindow from "@/windows/AIAssistant";
 
 /**
@@ -38,31 +26,31 @@ export const APPS: AppDefinition[] = [
     id: "about",
     title: "About.exe",
     icon: User,
-    defaultWidth: 520,
-    defaultHeight: 380,
+    defaultWidth: 1200,
+    defaultHeight: 820,
     component: AboutWindow,
   },
   {
     id: "projects",
     title: "Projects.exe",
     icon: FolderGit2,
-    defaultWidth: 680,
-    defaultHeight: 460,
+    defaultWidth: 1280,
+    defaultHeight: 800,
     component: ProjectsWindow,
   },
   {
     id: "experience",
     title: "Experience.exe",
     icon: Briefcase,
-    defaultWidth: 560,
-    defaultHeight: 420,
+    defaultWidth: 1180,
+    defaultHeight: 720,
     component: ExperienceWindow,
   },
   {
     id: "resume",
     title: "Resume.pdf",
     icon: FileText,
-    defaultWidth: 600,
+    defaultWidth: 1060,
     defaultHeight: 720,
     component: ResumeWindow,
   },
@@ -70,8 +58,8 @@ export const APPS: AppDefinition[] = [
     id: "contact",
     title: "Contact.exe",
     icon: Mail,
-    defaultWidth: 460,
-    defaultHeight: 360,
+    defaultWidth: 1180,
+    defaultHeight: 680,
     component: ContactWindow,
   },
   {
@@ -81,54 +69,6 @@ export const APPS: AppDefinition[] = [
     defaultWidth: 640,
     defaultHeight: 400,
     component: TerminalWindow,
-  },
-  {
-    id: "mission-control",
-    title: "MissionControl.exe",
-    icon: Rocket,
-    defaultWidth: 720,
-    defaultHeight: 480,
-    component: MissionControlWindow,
-  },
-  {
-    id: "live-metrics",
-    title: "LiveMetrics.exe",
-    icon: Activity,
-    defaultWidth: 700,
-    defaultHeight: 460,
-    component: LiveMetricsWindow,
-  },
-  {
-    id: "architecture-explorer",
-    title: "ArchitectureExplorer.exe",
-    icon: Network,
-    defaultWidth: 760,
-    defaultHeight: 520,
-    component: ArchitectureExplorerWindow,
-  },
-  {
-    id: "decision-engine",
-    title: "DecisionEngine.exe",
-    icon: GitBranch,
-    defaultWidth: 640,
-    defaultHeight: 460,
-    component: DecisionEngineWindow,
-  },
-  {
-    id: "mind-map",
-    title: "MindMap.exe",
-    icon: Brain,
-    defaultWidth: 760,
-    defaultHeight: 520,
-    component: MindMapWindow,
-  },
-  {
-    id: "code-review-simulator",
-    title: "CodeReviewSimulator.exe",
-    icon: Code2,
-    defaultWidth: 720,
-    defaultHeight: 520,
-    component: CodeReviewSimulatorWindow,
   },
   {
     id: "ai-assistant",

@@ -7,8 +7,39 @@ export const TASKBAR_HEIGHT = 48;
 
 /** Offset applied to each newly opened window so they cascade nicely. */
 const CASCADE_STEP = 28;
-const CASCADE_ORIGIN = { x: 96, y: 64 };
 const Z_BASE = 10;
+/** Minimum gap kept between a window and the viewport edges. */
+const VIEWPORT_MARGIN = 8;
+
+/**
+ * Compute a centered, viewport-clamped position + size for a new window so a
+ * large default size never opens off-screen or under the taskbar. A small
+ * per-window cascade offset keeps stacked windows distinguishable.
+ */
+function placeWindow(
+  defaultWidth: number,
+  defaultHeight: number,
+  index: number,
+): { position: Position; size: Size } {
+  const vw = typeof window !== "undefined" ? window.innerWidth : 1440;
+  const vh =
+    (typeof window !== "undefined" ? window.innerHeight : 900) - TASKBAR_HEIGHT;
+
+  const width = Math.min(defaultWidth, vw - VIEWPORT_MARGIN * 2);
+  const height = Math.min(defaultHeight, vh - VIEWPORT_MARGIN * 2);
+
+  const offset = (index % 6) * CASCADE_STEP;
+  const clamp = (v: number, max: number) =>
+    Math.max(VIEWPORT_MARGIN, Math.min(v, max - VIEWPORT_MARGIN));
+
+  return {
+    size: { width, height },
+    position: {
+      x: clamp(Math.round((vw - width) / 2) - 60 + offset, vw - width),
+      y: clamp(Math.round((vh - height) / 2) - 40 + offset, vh - height),
+    },
+  };
+}
 
 interface WindowStore {
   windows: WindowInstance[];
@@ -48,14 +79,18 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
     const app = APP_MAP[appId];
     if (!app) return;
 
-    const offset = windows.length * CASCADE_STEP;
     const nextZ = topZIndex + 1;
+    const { position, size } = placeWindow(
+      app.defaultWidth,
+      app.defaultHeight,
+      windows.length,
+    );
     const newWindow: WindowInstance = {
       id: appId,
       appId,
       title: app.title,
-      position: { x: CASCADE_ORIGIN.x + offset, y: CASCADE_ORIGIN.y + offset },
-      size: { width: app.defaultWidth, height: app.defaultHeight },
+      position,
+      size,
       zIndex: nextZ,
       isMinimized: false,
       isMaximized: false,

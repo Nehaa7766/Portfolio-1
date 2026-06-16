@@ -13,12 +13,6 @@ export type AppId =
   | "resume"
   | "contact"
   | "terminal"
-  | "mission-control"
-  | "live-metrics"
-  | "architecture-explorer"
-  | "decision-engine"
-  | "mind-map"
-  | "code-review-simulator"
   | "ai-assistant";
 
 /** A point in desktop space (px), used as the window's translate offset. */
