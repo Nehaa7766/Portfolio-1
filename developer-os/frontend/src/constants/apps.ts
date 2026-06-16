@@ -6,6 +6,7 @@ import {
   Mail,
   SquareTerminal,
   Bot,
+  Activity,
 } from "lucide-react";
 import type { AppDefinition, AppId } from "@/types/window";
 
@@ -16,6 +17,7 @@ import ResumeWindow from "@/windows/Resume";
 import ContactWindow from "@/windows/Contact";
 import TerminalWindow from "@/windows/Terminal";
 import AIAssistantWindow from "@/windows/AIAssistant";
+import LiveUpdateWindow from "@/windows/LiveUpdate";
 
 /**
  * The full registry of DeveloperOS applications.
@@ -74,9 +76,17 @@ export const APPS: AppDefinition[] = [
     id: "ai-assistant",
     title: "AIAssistant.exe",
     icon: Bot,
-    defaultWidth: 560,
-    defaultHeight: 600,
+    defaultWidth: 720,
+    defaultHeight: 640,
     component: AIAssistantWindow,
+  },
+  {
+    id: "live-update",
+    title: "LiveUpdate.exe",
+    icon: Activity,
+    defaultWidth: 1080,
+    defaultHeight: 720,
+    component: LiveUpdateWindow,
   },
 ];
 

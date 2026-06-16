@@ -13,7 +13,8 @@ export type AppId =
   | "resume"
   | "contact"
   | "terminal"
-  | "ai-assistant";
+  | "ai-assistant"
+  | "live-update";
 
 /** A point in desktop space (px), used as the window's translate offset. */
 export interface Position {
