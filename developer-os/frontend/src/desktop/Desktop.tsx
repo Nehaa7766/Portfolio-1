@@ -18,16 +18,16 @@ export function Desktop() {
   return (
     <main
       // Full-screen wallpaper.
-      className="relative h-screen w-screen overflow-hidden bg-gradient-to-br from-slate-900 via-zinc-900 to-black select-none"
+      className="relative h-screen w-screen select-none overflow-hidden bg-gradient-to-br from-sky-100 via-slate-200 to-slate-300 dark:from-slate-900 dark:via-zinc-900 dark:to-black"
       // Clicking empty desktop dismisses the start menu.
       onPointerDown={closeStartMenu}
     >
       {/* Ambient 3D wallpaper (behind everything, z-0). */}
       <DesktopBackground />
 
-      {/* Desktop icons — column grid in the top-left. */}
+      {/* Desktop icons — phone-style wrapping grid on mobile, column grid on desktop. */}
       <div
-        className="absolute left-3 top-3 z-10 grid grid-flow-col grid-rows-[repeat(7,minmax(0,1fr))] gap-1"
+        className="absolute left-3 top-3 z-10 grid grid-cols-4 gap-1 sm:grid-flow-col sm:grid-cols-none sm:grid-rows-[repeat(7,minmax(0,1fr))]"
         // Stop clicks on icons from bubbling up and closing nothing of note;
         // icons handle their own start-menu close.
         onPointerDown={(e) => e.stopPropagation()}

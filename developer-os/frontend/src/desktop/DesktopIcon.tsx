@@ -28,12 +28,12 @@ export function DesktopIcon({ app }: { app: AppDefinition }) {
       onBlur={() => setSelected(false)}
       className={cn(
         "flex w-20 flex-col items-center gap-1 rounded p-2 text-center transition-colors",
-        "hover:bg-sky-400/10 focus:outline-none active:scale-95",
+        "hover:bg-sky-500/15 focus:outline-none active:scale-95 dark:hover:bg-sky-400/10",
         selected && "bg-sky-500/25 ring-1 ring-sky-400/40",
       )}
     >
-      <Icon className="h-8 w-8 text-sky-300" strokeWidth={1.5} />
-      <span className="w-full break-words text-[11px] leading-tight text-zinc-100 drop-shadow">
+      <Icon className="h-8 w-8 text-sky-700 drop-shadow-sm dark:text-sky-300" strokeWidth={1.5} />
+      <span className="w-full break-words text-[11px] font-medium leading-tight text-zinc-800 drop-shadow-sm dark:font-normal dark:text-zinc-100 dark:drop-shadow">
         {app.title}
       </span>
     </button>

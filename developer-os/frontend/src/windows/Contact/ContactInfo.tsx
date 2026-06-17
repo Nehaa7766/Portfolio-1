@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Mail, Phone, MapPin, Copy, Check } from "lucide-react";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Panel } from "@/components/ui/Panel";
 import {
   CONTACT_INTRO,
   CONTACT_METHODS,
@@ -51,63 +51,62 @@ export function ContactInfo() {
   };
 
   return (
-    <div className="flex w-full flex-col gap-4">
-      <div>
-        <SectionHeader>Let&apos;s Connect</SectionHeader>
-        <p className="mt-3 text-sm text-zinc-400">{CONTACT_INTRO}</p>
-      </div>
+    <div className="flex flex-col gap-6 lg:col-span-5">
+      <Panel title="Let's Connect">
+        <p className="mb-5 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+          {CONTACT_INTRO}
+        </p>
 
-      <div className="flex flex-col gap-3">
-        {CONTACT_METHODS.map((m) => (
-          <div
-            key={m.type}
-            className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-sky-500/40"
-          >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-sky-500/15 text-sky-300">
-              <MethodIcon type={m.type} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="text-xs text-zinc-500">{m.label}</p>
-              {m.href ? (
-                <a
-                  href={m.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="truncate text-sm text-zinc-100 hover:text-sky-300"
-                >
-                  {m.value}
-                </a>
-              ) : (
-                <p className="truncate text-sm text-zinc-100">{m.value}</p>
-              )}
-            </div>
-            <button
-              type="button"
-              aria-label={`Copy ${m.label}`}
-              onClick={() => copy(m.type, m.value)}
-              className="rounded p-1.5 text-zinc-400 transition-colors hover:bg-white/10 hover:text-zinc-100"
+        <div className="flex flex-col gap-3">
+          {CONTACT_METHODS.map((m) => (
+            <div
+              key={m.type}
+              className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white p-4 transition-colors hover:border-sky-400/60 dark:border-white/[0.06] dark:bg-white/[0.02]"
             >
-              {copied === m.type ? (
-                <Check size={15} className="text-emerald-400" />
-              ) : (
-                <Copy size={15} />
-              )}
-            </button>
-          </div>
-        ))}
-      </div>
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-300">
+                <MethodIcon type={m.type} />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs text-zinc-500">{m.label}</p>
+                {m.href ? (
+                  <a
+                    href={m.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="truncate text-sm font-medium text-zinc-800 transition-colors hover:text-sky-600 dark:text-zinc-100 dark:hover:text-sky-300"
+                  >
+                    {m.value}
+                  </a>
+                ) : (
+                  <p className="truncate text-sm font-medium text-zinc-800 dark:text-zinc-100">{m.value}</p>
+                )}
+              </div>
+              <button
+                type="button"
+                aria-label={`Copy ${m.label}`}
+                onClick={() => copy(m.type, m.value)}
+                className="rounded-md p-2 text-zinc-500 transition-colors hover:bg-black/[0.03] hover:text-zinc-800 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-zinc-100"
+              >
+                {copied === m.type ? (
+                  <Check size={15} className="text-emerald-600 dark:text-emerald-400" />
+                ) : (
+                  <Copy size={15} />
+                )}
+              </button>
+            </div>
+          ))}
+        </div>
+      </Panel>
 
-      {/* Availability */}
-      <div>
-        <SectionHeader>Availability</SectionHeader>
-        <div className="mt-3 flex items-center gap-3 rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-3">
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px] shadow-emerald-400" />
+      <Panel title="Availability">
+        <div className="flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4 dark:border-emerald-400/20">
+          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500 shadow-[0_0_8px] shadow-emerald-400 dark:bg-emerald-400" />
           <div>
-            <p className="text-sm font-semibold text-emerald-300">{AVAILABILITY.status}</p>
-            <p className="text-xs text-zinc-400">{AVAILABILITY.note}</p>
+            <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-300">{AVAILABILITY.status}</p>
+            <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">{AVAILABILITY.note}</p>
           </div>
         </div>
-      </div>
+      </Panel>
     </div>
   );
 }

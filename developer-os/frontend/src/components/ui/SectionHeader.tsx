@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 
 /**
- * The `// SECTION TITLE` header used across DeveloperOS windows.
+ * Refined section heading used across DeveloperOS windows: a thin accent bar
+ * followed by small, uppercase, letter-spaced text.
  */
 export function SectionHeader({
   children,
@@ -11,14 +12,11 @@ export function SectionHeader({
   className?: string;
 }) {
   return (
-    <h2
-      className={cn(
-        "text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-400",
-        className,
-      )}
-    >
-      {"// "}
-      {children}
-    </h2>
+    <div className={cn("flex items-center gap-3", className)}>
+      <span className="h-4 w-[3px] shrink-0 rounded-full bg-sky-500 dark:bg-sky-400/80" />
+      <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+        {children}
+      </h2>
+    </div>
   );
 }

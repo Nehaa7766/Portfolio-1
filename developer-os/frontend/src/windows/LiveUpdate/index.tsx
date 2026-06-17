@@ -62,17 +62,17 @@ function StatCard({
   accent: string;
 }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
+    <div className="rounded-xl border border-zinc-200 bg-white p-4 transition-colors hover:border-sky-400/60 dark:border-white/[0.06] dark:bg-white/[0.02]">
       <div className="flex items-start justify-between">
-        <span className="text-2xl font-bold text-white">{value}</span>
+        <span className="text-2xl font-semibold text-zinc-900 dark:text-white">{value}</span>
         <span
-          className="flex h-7 w-7 items-center justify-center rounded-md"
-          style={{ backgroundColor: `${accent}22`, color: accent }}
+          className="flex h-8 w-8 items-center justify-center rounded-lg"
+          style={{ backgroundColor: `${accent}1a`, color: accent }}
         >
-          <Icon size={15} />
+          <Icon size={16} />
         </span>
       </div>
-      <div className="mt-1 text-xs text-zinc-400">{label}</div>
+      <div className="mt-1.5 text-xs text-zinc-500">{label}</div>
     </div>
   );
 }
@@ -113,22 +113,22 @@ export default function LiveUpdateWindow() {
   }, [load]);
 
   return (
-    <div className="flex h-full flex-col bg-[#060b16] font-mono text-zinc-300">
+    <div className="flex h-full flex-col bg-white text-zinc-600 dark:bg-[#0a0e16] dark:text-zinc-300">
       {/* Header / profile */}
-      <header className="flex items-center justify-between gap-3 border-b border-white/10 p-4">
+      <header className="flex items-center justify-between gap-3 border-b border-zinc-200 px-4 py-3 dark:border-white/[0.06]">
         <div className="flex min-w-0 items-center gap-3">
           {stats ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={stats.profile.avatarUrl}
               alt={stats.profile.login}
-              className="h-12 w-12 rounded-full ring-2 ring-sky-500/40"
+              className="h-12 w-12 rounded-full ring-1 ring-black/10 dark:ring-white/10"
             />
           ) : (
-            <div className="h-12 w-12 animate-pulse rounded-full bg-zinc-800" />
+            <div className="h-12 w-12 animate-pulse rounded-full bg-zinc-200 dark:bg-white/[0.06]" />
           )}
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-white">
+            <p className="truncate text-sm font-semibold tracking-tight text-zinc-900 dark:text-white">
               {stats?.profile.name ?? stats?.profile.login ?? "Loading…"}
             </p>
             {stats && (
@@ -136,7 +136,7 @@ export default function LiveUpdateWindow() {
                 href={stats.profile.htmlUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 text-xs text-sky-400 hover:underline"
+                className="flex items-center gap-1 text-xs text-sky-600 hover:underline dark:text-sky-300"
               >
                 <GitHubMark size={12} />@{stats.profile.login}
                 <ExternalLink size={11} />
@@ -146,11 +146,11 @@ export default function LiveUpdateWindow() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1.5 text-xs text-zinc-400">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 px-2.5 py-0.5 text-[11px] font-medium text-zinc-500 dark:border-white/10 dark:text-zinc-400">
             <span
               className={cn(
-                "h-2 w-2 rounded-full",
-                error ? "bg-red-500" : "bg-emerald-400 shadow-[0_0_8px] shadow-emerald-400",
+                "h-1.5 w-1.5 rounded-full",
+                error ? "bg-red-500" : "bg-emerald-500 dark:bg-emerald-400",
               )}
             />
             {error ? "Offline" : "Live"}
@@ -165,7 +165,7 @@ export default function LiveUpdateWindow() {
             onClick={() => void load(true)}
             disabled={refreshing}
             aria-label="Refresh"
-            className="rounded-md border border-white/10 p-1.5 text-zinc-300 transition-colors hover:bg-white/10 disabled:opacity-50"
+            className="rounded-lg border border-zinc-200 p-1.5 text-zinc-600 transition-colors hover:border-sky-400/60 hover:bg-black/[0.02] disabled:opacity-50 dark:border-white/10 dark:text-zinc-300 dark:hover:bg-white/5"
           >
             <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
           </button>
@@ -173,17 +173,17 @@ export default function LiveUpdateWindow() {
       </header>
 
       {error && (
-        <p className="mx-4 mt-3 rounded-md border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-300">
+        <p className="mx-5 mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-600 dark:text-red-300">
           {error}
         </p>
       )}
 
       {/* Body */}
-      <div className="flex-1 overflow-auto p-4">
+      <div className="flex-1 overflow-auto p-5">
         {loading && !stats ? (
           <p className="py-10 text-center text-sm text-zinc-500">Loading GitHub activity…</p>
         ) : stats ? (
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-6">
             {/* Stats */}
             <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
               <StatCard icon={FolderGit2} value={stats.profile.publicRepos} label="Public Repos" accent="#0ea5e9" />
@@ -192,30 +192,30 @@ export default function LiveUpdateWindow() {
               <StatCard icon={Users} value={stats.profile.following} label="Following" accent="#a855f7" />
             </div>
 
-            <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               {/* Top repos */}
               <section>
                 <SectionHeader>Top Repositories</SectionHeader>
-                <div className="mt-3 flex flex-col gap-2">
+                <div className="mt-4 flex flex-col gap-3">
                   {stats.repos.map((repo) => (
                     <a
                       key={repo.name}
                       href={repo.htmlUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-lg border border-white/10 bg-white/[0.02] p-3 transition-colors hover:border-sky-500/40"
+                      className="rounded-xl border border-zinc-200 bg-white p-4 transition-colors hover:border-sky-400/60 dark:border-white/[0.06] dark:bg-white/[0.02]"
                     >
                       <div className="flex items-center justify-between gap-2">
-                        <span className="truncate text-sm font-semibold text-sky-300">{repo.name}</span>
-                        <span className="flex shrink-0 items-center gap-3 text-xs text-zinc-400">
+                        <span className="truncate text-sm font-semibold text-sky-600 dark:text-sky-300">{repo.name}</span>
+                        <span className="flex shrink-0 items-center gap-3 text-xs text-zinc-500">
                           <span className="flex items-center gap-1"><Star size={12} />{repo.stars}</span>
                           <span className="flex items-center gap-1"><GitFork size={12} />{repo.forks}</span>
                         </span>
                       </div>
                       {repo.description && (
-                        <p className="mt-1 line-clamp-2 text-xs text-zinc-400">{repo.description}</p>
+                        <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-zinc-500">{repo.description}</p>
                       )}
-                      <div className="mt-2 flex items-center gap-3 text-xs text-zinc-500">
+                      <div className="mt-3 flex items-center gap-3 text-xs text-zinc-500">
                         {repo.language && (
                           <span className="flex items-center gap-1.5">
                             <span
@@ -238,15 +238,18 @@ export default function LiveUpdateWindow() {
               {/* Activity */}
               <section>
                 <SectionHeader>Recent Activity</SectionHeader>
-                <ol className="mt-3 flex flex-col gap-3">
+                <ol className="mt-4 flex flex-col gap-3">
                   {stats.activity.map((a) => (
-                    <li key={a.id} className="flex items-start gap-3 text-sm">
-                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sky-500/15 text-sky-400">
-                        <ActivityIcon size={12} />
+                    <li
+                      key={a.id}
+                      className="flex items-start gap-3 rounded-xl border border-zinc-200 bg-white p-4 text-sm transition-colors hover:border-sky-400/60 dark:border-white/[0.06] dark:bg-white/[0.02]"
+                    >
+                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-300">
+                        <ActivityIcon size={13} />
                       </span>
                       <div className="min-w-0">
-                        <p className="text-zinc-300">{a.text}</p>
-                        <p className="text-xs text-zinc-500">{relativeTime(a.createdAt)}</p>
+                        <p className="text-zinc-700 dark:text-zinc-300">{a.text}</p>
+                        <p className="mt-0.5 text-xs text-zinc-500">{relativeTime(a.createdAt)}</p>
                       </div>
                     </li>
                   ))}

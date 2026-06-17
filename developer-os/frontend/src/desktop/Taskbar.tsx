@@ -7,6 +7,7 @@ import { useWindowStore } from "@/store/windowStore";
 import { useDesktopStore } from "@/store/desktopStore";
 import { APP_MAP } from "@/constants/apps";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 /** The 4-pane Windows 11 mark, in the OS accent color. */
 function WindowsLogo({ className }: { className?: string }) {
@@ -36,7 +37,7 @@ function TrayClock() {
   }, []);
 
   return (
-    <div className="flex min-w-[64px] flex-col items-end leading-tight text-[11px] text-zinc-100">
+    <div className="flex min-w-[64px] flex-col items-end text-[11px] leading-tight text-zinc-700 dark:text-zinc-100">
       <span>
         {now
           ? now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
@@ -82,19 +83,21 @@ export function Taskbar() {
 
   return (
     <footer
-      className="absolute inset-x-0 bottom-0 z-[9999] h-12 border-t border-white/10 bg-zinc-900/70 backdrop-blur-2xl"
+      className="absolute inset-x-0 bottom-0 z-[9999] h-12 border-t border-black/10 bg-white/60 backdrop-blur-2xl dark:border-white/10 dark:bg-zinc-900/70"
       // Don't let taskbar clicks bubble to the desktop (which closes the menu).
       onPointerDown={(e) => e.stopPropagation()}
     >
       {/* Centered app group: Start + running windows */}
-      <div className="absolute left-1/2 top-0 flex h-full -translate-x-1/2 items-center gap-1">
+      <div className="absolute left-1/2 top-0 flex h-full max-w-[62vw] -translate-x-1/2 items-center gap-1 overflow-x-auto [scrollbar-width:none] sm:max-w-none [&::-webkit-scrollbar]:hidden">
         <button
           type="button"
           aria-label="Start"
           onClick={toggleStartMenu}
           className={cn(
             "flex h-10 w-10 items-center justify-center rounded-md transition-colors",
-            isStartMenuOpen ? "bg-white/15" : "hover:bg-white/10",
+            isStartMenuOpen
+              ? "bg-black/10 dark:bg-white/15"
+              : "hover:bg-black/10 dark:hover:bg-white/10",
           )}
         >
           <WindowsLogo className="h-5 w-5" />
@@ -111,15 +114,17 @@ export function Taskbar() {
               onClick={() => handleTaskbarClick(w.id)}
               className={cn(
                 "group relative flex h-10 w-10 items-center justify-center rounded-md transition-colors",
-                isActive ? "bg-white/15" : "hover:bg-white/10",
+                isActive
+                  ? "bg-black/10 dark:bg-white/15"
+                  : "hover:bg-black/10 dark:hover:bg-white/10",
               )}
             >
-              <Icon size={18} className="text-sky-300" />
+              <Icon size={18} className="text-sky-600 dark:text-sky-300" />
               {/* Running-app underline indicator (longer when active). */}
               <span
                 className={cn(
-                  "absolute bottom-0.5 h-0.5 rounded-full bg-sky-400 transition-all",
-                  isActive ? "w-4" : "w-1.5 bg-zinc-400 group-hover:bg-sky-300",
+                  "absolute bottom-0.5 h-0.5 rounded-full bg-sky-500 transition-all dark:bg-sky-400",
+                  isActive ? "w-4" : "w-1.5 bg-zinc-400 group-hover:bg-sky-400 dark:group-hover:bg-sky-300",
                 )}
               />
             </button>
@@ -128,20 +133,21 @@ export function Taskbar() {
       </div>
 
       {/* System tray */}
-      <div className="absolute right-1 top-0 flex h-full items-center gap-2 pr-1 text-zinc-200">
+      <div className="absolute right-1 top-0 flex h-full items-center gap-2 pr-1 text-zinc-600 dark:text-zinc-200">
+        <ThemeToggle />
         <button
           type="button"
           aria-label="Show hidden icons"
-          className="rounded p-1.5 hover:bg-white/10"
+          className="hidden rounded p-1.5 hover:bg-black/10 sm:block dark:hover:bg-white/10"
         >
           <ChevronUp size={14} />
         </button>
-        <div className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-white/10">
+        <div className="hidden items-center gap-2 rounded-md px-2 py-1 hover:bg-black/10 sm:flex dark:hover:bg-white/10">
           <Wifi size={15} />
           <Volume2 size={15} />
           <BatteryFull size={16} />
         </div>
-        <div className="rounded-md px-2 py-1 hover:bg-white/10">
+        <div className="rounded-md px-2 py-1 hover:bg-black/10 dark:hover:bg-white/10">
           <TrayClock />
         </div>
       </div>

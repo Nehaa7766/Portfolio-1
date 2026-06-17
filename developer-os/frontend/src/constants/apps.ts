@@ -68,8 +68,8 @@ export const APPS: AppDefinition[] = [
     id: "terminal",
     title: "Terminal.exe",
     icon: SquareTerminal,
-    defaultWidth: 640,
-    defaultHeight: 400,
+    defaultWidth: 880,
+    defaultHeight: 560,
     component: TerminalWindow,
   },
   {

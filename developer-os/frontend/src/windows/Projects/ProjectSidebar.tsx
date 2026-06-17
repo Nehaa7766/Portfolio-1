@@ -10,6 +10,7 @@ import {
   type ProjectCategory,
   type ProjectStatus,
 } from "@/data/projects";
+import { SectionLabel } from "@/components/ui/Panel";
 import { cn } from "@/lib/utils";
 
 type CategoryFilter = ProjectCategory | "All";
@@ -21,15 +22,6 @@ const DONUT = [
   { label: "Planned", status: "Planned" as ProjectStatus, color: "#f59e0b" },
 ];
 
-function SectionHeader({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-400">
-      {"// "}
-      {children}
-    </h2>
-  );
-}
-
 /** Multi-segment ring built with the strokeDasharray (pathLength=100) trick. */
 function StatsDonut({ counts, total }: { counts: number[]; total: number }) {
   // Percentage length of each segment, and its cumulative start offset —
@@ -40,9 +32,16 @@ function StatsDonut({ counts, total }: { counts: number[]; total: number }) {
   );
 
   return (
-    <div className="relative h-28 w-28 shrink-0">
-      <svg viewBox="0 0 36 36" className="h-28 w-28 -rotate-90">
-        <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#1e293b" strokeWidth="3.5" />
+    <div className="relative h-24 w-24 shrink-0">
+      <svg viewBox="0 0 36 36" className="h-24 w-24 -rotate-90">
+        <circle
+          cx="18"
+          cy="18"
+          r="15.9155"
+          fill="none"
+          strokeWidth="3.5"
+          className="stroke-zinc-200 dark:stroke-slate-800"
+        />
         {DONUT.map((seg, i) => (
           <circle
             key={seg.label}
@@ -52,14 +51,15 @@ function StatsDonut({ counts, total }: { counts: number[]; total: number }) {
             fill="none"
             stroke={seg.color}
             strokeWidth="3.5"
+            strokeLinecap="round"
             strokeDasharray={`${values[i]} ${100 - values[i]}`}
             strokeDashoffset={-offsets[i]}
           />
         ))}
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-xl font-bold text-white">{total}</span>
-        <span className="text-[10px] text-zinc-400">Projects</span>
+        <span className="text-lg font-semibold text-zinc-900 dark:text-white">{total}</span>
+        <span className="text-[10px] text-zinc-500">Projects</span>
       </div>
     </div>
   );
@@ -77,12 +77,12 @@ function FilterSelect({
   children: React.ReactNode;
 }) {
   return (
-    <label className="flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-zinc-300">
-      <Icon size={14} className="shrink-0 text-sky-400" />
+    <label className="flex items-center gap-2 rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-600 transition-colors focus-within:ring-2 focus-within:ring-sky-500/40 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
+      <Icon size={14} className="shrink-0 text-sky-600 dark:text-sky-300" />
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-transparent text-zinc-200 focus:outline-none [&>option]:bg-zinc-800"
+        className="w-full bg-transparent text-zinc-800 focus:outline-none dark:text-zinc-200 [&>option]:bg-white dark:[&>option]:bg-zinc-800"
       >
         {children}
       </select>
@@ -110,10 +110,10 @@ export function ProjectSidebar({
   );
 
   return (
-    <aside className="flex w-72 shrink-0 flex-col gap-5 overflow-auto border-r border-white/10 p-4">
+    <aside className="hidden w-72 shrink-0 flex-col gap-6 overflow-auto border-r border-zinc-200 bg-zinc-50/60 p-5 lg:flex dark:border-white/[0.06] dark:bg-white/[0.02]">
       {/* Navigation */}
       <section>
-        <SectionHeader>Project Navigation</SectionHeader>
+        <SectionLabel className="mb-4">Project Navigation</SectionLabel>
         <nav className="flex flex-col gap-1">
           {PROJECT_NAV.map((item) => {
             const Icon = item.icon;
@@ -124,13 +124,16 @@ export function ProjectSidebar({
                 type="button"
                 onClick={() => onCategory(item.id)}
                 className={cn(
-                  "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+                  "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
                   active
-                    ? "bg-sky-500/15 text-sky-300 ring-1 ring-sky-500/30"
-                    : "text-zinc-300 hover:bg-white/5",
+                    ? "bg-sky-500/10 text-sky-600 ring-1 ring-sky-500/30 dark:text-sky-300"
+                    : "text-zinc-600 hover:bg-black/[0.03] dark:text-zinc-300 dark:hover:bg-white/5",
                 )}
               >
-                <Icon size={16} className={active ? "text-sky-300" : "text-zinc-400"} />
+                <Icon
+                  size={16}
+                  className={active ? "text-sky-600 dark:text-sky-300" : "text-zinc-400 dark:text-zinc-500"}
+                />
                 <span className="flex-1 text-left">{item.label}</span>
                 <span className="text-xs text-zinc-500">{countByCategory(item.id)}</span>
               </button>
@@ -141,7 +144,7 @@ export function ProjectSidebar({
 
       {/* Quick filters */}
       <section>
-        <SectionHeader>Quick Filters</SectionHeader>
+        <SectionLabel className="mb-4">Quick Filters</SectionLabel>
         <div className="flex flex-col gap-2">
           <FilterSelect icon={Filter} value={tech} onChange={onTech}>
             <option value="All">All Technologies</option>
@@ -167,8 +170,8 @@ export function ProjectSidebar({
 
       {/* Stats */}
       <section>
-        <SectionHeader>Project Stats</SectionHeader>
-        <div className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/[0.03] p-4">
+        <SectionLabel className="mb-4">Project Stats</SectionLabel>
+        <div className="flex items-center gap-4 rounded-xl border border-zinc-200 bg-white p-4 dark:border-white/[0.06] dark:bg-white/[0.02]">
           <StatsDonut counts={counts} total={PROJECTS.length} />
           <ul className="flex flex-col gap-2 text-sm">
             {DONUT.map((seg, i) => (
@@ -177,17 +180,17 @@ export function ProjectSidebar({
                   className="h-2.5 w-2.5 rounded-full"
                   style={{ backgroundColor: seg.color }}
                 />
-                <span className="flex-1 text-zinc-300">{seg.label}</span>
-                <span className="text-zinc-400">{counts[i]}</span>
+                <span className="flex-1 text-zinc-600 dark:text-zinc-300">{seg.label}</span>
+                <span className="text-zinc-500">{counts[i]}</span>
               </li>
             ))}
           </ul>
         </div>
         <button
           type="button"
-          className="mt-3 flex w-full items-center justify-center gap-2 rounded-md border border-white/10 py-2 text-sm text-zinc-200 transition-colors hover:bg-white/10"
+          className="mt-3 flex w-full items-center justify-center gap-2 rounded-md border border-zinc-200 py-2 text-sm text-zinc-700 transition-colors hover:bg-black/[0.03] dark:border-white/10 dark:text-zinc-200 dark:hover:bg-white/10"
         >
-          <LineChart size={15} className="text-sky-400" />
+          <LineChart size={15} className="text-sky-600 dark:text-sky-300" />
           View Analytics
         </button>
       </section>

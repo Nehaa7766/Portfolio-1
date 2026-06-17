@@ -7,7 +7,7 @@ summary: Professional experience timeline and learning journey.
 
 # Professional Experience
 
-## Student Developer — 2024 to Present
+## Student Developer — 2025 to Present
 
 **Personal Projects & Learning**
 
@@ -17,12 +17,11 @@ real-world problems through code.
 - Focus: Full Stack Development, Problem Solving
 - Status: Actively Learning & Building
 
-## Academic Projects — 2024
+## Academic Projects — 2025
 
 **College Projects**
 
-Developed various academic projects using Java, Spring Boot, React, and MySQL.
-Delivered 6+ projects covering web applications and data-driven systems.
+Built a Digital Forensics and Incident Response (DFIR) platform that automates endpoint evidence collection, analyzes system artifacts, detects suspicious activity, and helps security teams investigate cyber incidents faster through risk scoring, timelines, and reporting.
 
 - Technologies: Java, Spring Boot, React, MySQL
 
@@ -30,17 +29,11 @@ Delivered 6+ projects covering web applications and data-driven systems.
 
 **Learning & Exploration**
 
-Focused on data structures, algorithms, OOP concepts, and web technologies.
+Focused on System Designing and data structures, algorithms, OOP concepts, and web technologies.
 
 - Technologies: DSA, OOP, HTML/CSS, JavaScript
 
-## Experience Stats
-
-- 15+ Projects Completed
-- 20+ Technologies Learned
-- 500+ Problems Solved
-- 1000+ Learning Hours
 
 ## Current Focus
 
-System Design, Next.js, DevOps, Automation Testing.
+System Design, Next.js, Development , Automation Testing.

@@ -6,6 +6,7 @@ import {
   type ProjectCategory,
   type ProjectStatus,
 } from "@/data/projects";
+import { Panel } from "@/components/ui/Panel";
 import { ProjectSidebar } from "./ProjectSidebar";
 import { ProjectOverview } from "./ProjectOverview";
 import { ProjectList } from "./ProjectList";
@@ -39,7 +40,7 @@ export default function ProjectsWindow() {
   }, [category, status, tech, search]);
 
   return (
-    <div className="flex h-full bg-[#060b16] font-mono text-zinc-300">
+    <div className="flex h-full bg-white text-zinc-600 dark:bg-[#0a0e16] dark:text-zinc-300">
       <ProjectSidebar
         category={category}
         onCategory={setCategory}
@@ -49,7 +50,7 @@ export default function ProjectsWindow() {
         onTech={setTech}
       />
 
-      <div className="flex min-w-0 flex-1 flex-col gap-5 overflow-auto p-5">
+      <div className="flex min-w-0 flex-1 flex-col gap-6 overflow-auto p-6">
         <ProjectOverview
           search={search}
           onSearch={setSearch}
@@ -57,13 +58,9 @@ export default function ProjectsWindow() {
           onView={setView}
         />
 
-        <section className="rounded-lg border border-sky-500/20 bg-white/[0.02] p-4">
-          <h2 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-400">
-            {"// "}
-            Projects List
-          </h2>
+        <Panel title="Projects List">
           <ProjectList projects={filtered} view={view} />
-        </section>
+        </Panel>
       </div>
     </div>
   );

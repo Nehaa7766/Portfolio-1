@@ -1,13 +1,13 @@
 ---
 title: About Neha Shinde
 category: profile
-tags: [about, profile, bio, who, introduction, software engineer, pune, india]
+tags: [about, profile, bio, who, introduction, software engineer, Mumbai, india]
 summary: Profile and short biography of Neha Shinde, Software Engineer.
 ---
 
 # About Neha Shinde
 
-Neha Shinde is a **Software Engineer** based in **Pune, India**, focused on
+Neha Shinde is a **Software Engineer** based in **Mumbai, India**, focused on
 full stack development.
 
 ## Profile
@@ -29,7 +29,7 @@ security, and developer experience.
 
 ## Current Mission
 
-Building **DeveloperOS** — a browser-based Software Engineer Operating System
+Building **Hospital Managment system Project** — a browser-based Software Engineer Operating System
 that presents engineering work as an explorable desktop OS.
 
 ## Philosophy

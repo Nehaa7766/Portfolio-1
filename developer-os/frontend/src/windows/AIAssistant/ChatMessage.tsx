@@ -4,7 +4,7 @@ import { Bot, User, FileText } from "lucide-react";
 import type { ChatMessage as Message } from "@/types/ai";
 import { cn } from "@/lib/utils";
 
-/** Markdown renderer styled for the dark assistant bubble. */
+/** Markdown renderer styled for the assistant bubble. */
 function Markdown({ content }: { content: string }) {
   return (
     <ReactMarkdown
@@ -18,10 +18,10 @@ function Markdown({ content }: { content: string }) {
           <ol className="mb-2 list-decimal space-y-1 pl-5 last:mb-0">{children}</ol>
         ),
         strong: ({ children }) => (
-          <strong className="font-semibold text-white">{children}</strong>
+          <strong className="font-semibold text-zinc-900 dark:text-white">{children}</strong>
         ),
         code: ({ children }) => (
-          <code className="rounded bg-black/40 px-1 py-0.5 text-[0.85em] text-sky-300">
+          <code className="rounded bg-zinc-200 px-1 py-0.5 font-mono text-[0.85em] text-sky-700 dark:bg-white/10 dark:text-sky-300">
             {children}
           </code>
         ),
@@ -30,14 +30,14 @@ function Markdown({ content }: { content: string }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sky-400 underline"
+            className="text-sky-600 underline dark:text-sky-300"
           >
             {children}
           </a>
         ),
-        h1: ({ children }) => <h3 className="mb-2 text-sm font-semibold text-white">{children}</h3>,
-        h2: ({ children }) => <h3 className="mb-2 text-sm font-semibold text-white">{children}</h3>,
-        h3: ({ children }) => <h4 className="mb-1 text-sm font-semibold text-white">{children}</h4>,
+        h1: ({ children }) => <h3 className="mb-2 text-sm font-semibold text-zinc-900 dark:text-white">{children}</h3>,
+        h2: ({ children }) => <h3 className="mb-2 text-sm font-semibold text-zinc-900 dark:text-white">{children}</h3>,
+        h3: ({ children }) => <h4 className="mb-1 text-sm font-semibold text-zinc-900 dark:text-white">{children}</h4>,
       }}
     >
       {content}
@@ -54,7 +54,9 @@ export function ChatMessage({ message }: { message: Message }) {
       <span
         className={cn(
           "flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
-          isUser ? "bg-zinc-700 text-zinc-200" : "bg-sky-600 text-white",
+          isUser
+            ? "border border-zinc-200 bg-zinc-100 text-zinc-600 dark:border-white/[0.06] dark:bg-white/[0.06] dark:text-zinc-300"
+            : "bg-sky-600 text-white",
         )}
       >
         {isUser ? <User size={16} /> : <Bot size={16} />}
@@ -63,10 +65,10 @@ export function ChatMessage({ message }: { message: Message }) {
       <div className={cn("min-w-0 max-w-[80%]", isUser && "flex flex-col items-end")}>
         <div
           className={cn(
-            "rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
+            "px-4 py-2.5 text-sm leading-relaxed",
             isUser
-              ? "rounded-tr-sm bg-sky-600 text-white"
-              : "rounded-tl-sm bg-zinc-800 text-zinc-200",
+              ? "rounded-2xl rounded-br-sm bg-sky-600 text-white"
+              : "rounded-2xl rounded-bl-sm border border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-white/[0.06] dark:bg-white/[0.03] dark:text-zinc-200",
           )}
         >
           {isUser ? (
@@ -82,7 +84,7 @@ export function ChatMessage({ message }: { message: Message }) {
             {message.sources.map((src) => (
               <span
                 key={src}
-                className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-zinc-400"
+                className="inline-flex items-center gap-1 rounded-md border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[11px] text-zinc-500 dark:border-white/[0.06] dark:bg-white/5 dark:text-zinc-400"
               >
                 <FileText size={11} />
                 {src}

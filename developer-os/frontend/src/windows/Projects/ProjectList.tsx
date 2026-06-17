@@ -11,9 +11,14 @@ export function ProjectList({
 }) {
   if (projects.length === 0) {
     return (
-      <p className="rounded-lg border border-dashed border-white/10 p-8 text-center text-sm text-zinc-500">
-        No projects match your filters.
-      </p>
+      <div className="rounded-xl border border-dashed border-zinc-200 bg-white p-10 text-center dark:border-white/10 dark:bg-white/[0.02]">
+        <p className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
+          No projects match your filters.
+        </p>
+        <p className="mt-1 text-sm text-zinc-500">
+          Try adjusting your search or clearing a filter.
+        </p>
+      </div>
     );
   }
 

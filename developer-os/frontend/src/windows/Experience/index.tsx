@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionLabel } from "@/components/ui/Panel";
 import { EXPERIENCE_TABS } from "@/data/experience";
 import { ExperienceSidebar } from "./ExperienceSidebar";
 import { ExperienceTimeline } from "./ExperienceTimeline";
@@ -13,15 +13,15 @@ export default function ExperienceWindow() {
   const tabLabel = EXPERIENCE_TABS.find((t) => t.id === tab)?.label ?? "";
 
   return (
-    <div className="flex h-full bg-[#060b16] font-mono text-zinc-300">
+    <div className="flex h-full bg-white text-zinc-600 dark:bg-[#0a0e16] dark:text-zinc-300">
       <ExperienceSidebar activeTab={tab} onTab={setTab} />
 
       {/* Middle content */}
-      <div className="min-w-0 flex-1 overflow-auto p-5">
-        <SectionHeader className="text-sky-400">
+      <div className="flex min-w-0 flex-1 flex-col gap-6 overflow-auto p-6">
+        <SectionLabel>
           {tab === "timeline" ? "Professional Experience" : tabLabel}
-        </SectionHeader>
-        <div className="mt-5">
+        </SectionLabel>
+        <div>
           {tab === "timeline" ? (
             <ExperienceTimeline />
           ) : (

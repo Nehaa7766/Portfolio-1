@@ -1,5 +1,5 @@
 import { Quote } from "lucide-react";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Panel } from "@/components/ui/Panel";
 import { CONTACT_QUOTE } from "@/data/contact";
 
 const NODES: { x: number; y: number; r: number }[] = [
@@ -26,11 +26,13 @@ const LINKS: [number, number][] = [
  */
 export function ConnectVia() {
   return (
-    <div className="flex w-full flex-col gap-4">
-      <SectionHeader>Connect Via</SectionHeader>
-
-      <div className="rounded-lg border border-white/10 bg-white/[0.02] p-4">
-        <svg viewBox="0 0 100 100" className="h-56 w-full">
+    <Panel
+      title="Connect Via"
+      className="lg:col-span-3"
+      bodyClassName="flex flex-col gap-5"
+    >
+      <div className="rounded-xl border border-zinc-200 bg-white p-4 dark:border-white/[0.06] dark:bg-white/[0.02]">
+        <svg viewBox="0 0 100 100" className="h-52 w-full">
           {LINKS.map(([a, b], i) => (
             <line
               key={i}
@@ -57,10 +59,10 @@ export function ConnectVia() {
         </svg>
       </div>
 
-      <div className="mt-auto rounded-lg border border-dashed border-sky-500/30 p-4 text-center">
-        <Quote size={16} className="mx-auto mb-2 text-sky-400" />
-        <p className="text-xs italic text-sky-200/80">{CONTACT_QUOTE}</p>
+      <div className="rounded-xl border border-sky-500/20 bg-sky-500/5 p-4 text-center">
+        <Quote size={16} className="mx-auto mb-2 text-sky-600 dark:text-sky-400" />
+        <p className="text-sm italic leading-relaxed text-sky-700 dark:text-sky-200/80">{CONTACT_QUOTE}</p>
       </div>
-    </div>
+    </Panel>
   );
 }
